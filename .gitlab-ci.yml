@@ -1,0 +1,18 @@
+image: microsoft/dotnet:latest
+
+stages:
+  - test
+
+variables:
+  # Change it to your project name here
+  project: dotnet_ci_test
+
+before_script:
+  - dotnet restore --source "http://www.nuget.org/api/v2"
+
+test:
+  stage: test
+  variables:
+    test_path: $project.Tests
+  script:
+    - dotnet test $test_path/$test_path.csproj
